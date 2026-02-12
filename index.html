@@ -94,7 +94,7 @@ button {
 
 <body>
 
-<audio id="loveSong" src="hello.mp3" preload="auto"></audio>
+<audio id="loveSong" src="hello.mp3" preload="auto" autoplay loop></audio>
 
 <div class="container" id="card">
   <h1>❤️ Be My Valentine ❤️</h1>
@@ -120,22 +120,6 @@ button {
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const card = document.getElementById("card");
-const song = document.getElementById("loveSong");
-
-// Function to gradually fade in music
-function playMusicSmoothly(audio) {
-  audio.volume = 0;
-  audio.play().catch(()=>{}); // catch in case autoplay is blocked
-  let vol = 0;
-  const fadeIn = setInterval(() => {
-    if(vol < 1){
-      vol += 0.02;
-      audio.volume = vol;
-    } else {
-      clearInterval(fadeIn);
-    }
-  }, 100);
-}
 
 noBtn.addEventListener("mouseover", () => {
   noBtn.style.position = "absolute";
@@ -144,9 +128,6 @@ noBtn.addEventListener("mouseover", () => {
 });
 
 yesBtn.addEventListener("click", () => {
-
-  playMusicSmoothly(song);
-
   card.innerHTML = `
   <h1>Gladys ❤️</h1>
   <p>You just made me the happiest man alive 😍</p>
@@ -185,7 +166,6 @@ function createBears() {
     }, 6000);
   }, 1200);
 }
-
 </script>
 
 </body>
