@@ -94,7 +94,7 @@ button {
 
 <body>
 
-<audio id="loveSong" src="hello.mp3" preload="auto" loop></audio>
+<audio id="loveSong" src="hello.mp3" preload="auto" autoplay loop></audio>
 
 <div class="container" id="card">
   <h1>❤️ Be My Valentine ❤️</h1>
@@ -122,15 +122,19 @@ const noBtn = document.getElementById("noBtn");
 const card = document.getElementById("card");
 const song = document.getElementById("loveSong");
 
-// Trigger music on first interaction (works on mobile)
-function playMusicOnce() {
+// Attempt autoplay on page load (works on desktop)
+window.addEventListener('load', () => {
     song.play().catch(()=>{});
-    document.removeEventListener("touchstart", playMusicOnce);
-    document.removeEventListener("click", playMusicOnce);
-}
+});
 
-document.addEventListener("touchstart", playMusicOnce, {once: true});
-document.addEventListener("click", playMusicOnce, {once: true});
+// Mobile fallback: play music on first touch/click
+function playMusicMobile() {
+    song.play().catch(()=>{});
+    document.removeEventListener("touchstart", playMusicMobile);
+    document.removeEventListener("click", playMusicMobile);
+}
+document.addEventListener("touchstart", playMusicMobile, {once: true});
+document.addEventListener("click", playMusicMobile, {once: true});
 
 noBtn.addEventListener("mouseover", () => {
   noBtn.style.position = "absolute";
